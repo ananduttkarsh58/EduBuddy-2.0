@@ -1,0 +1,285 @@
+.main {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  padding-top: 60px; /* Account for fixed navbar */
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #a0a0a0;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+/* Search Bar */
+.searchBar {
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  padding: 0 1.5rem;
+  border: 1px solid #3a3a3a;
+}
+
+.searchIcon {
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 1.25rem 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.searchInput::placeholder {
+  color: #6b7280;
+}
+
+/* Chat Container */
+.chatContainer {
+  flex: 1;
+  max-width: 1200px;
+  margin: 2rem auto;
+  width: 100%;
+  padding: 0 1rem;
+  overflow-y: auto;
+}
+
+/* Message Wrappers */
+.botMessageWrapper,
+.userMessageWrapper {
+  margin-bottom: 2rem;
+}
+
+.avatarLabel {
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  margin-bottom: 0.5rem;
+  margin-left: 60px;
+}
+
+.userLabel {
+  font-size: 0.875rem;
+  color: #a0a0a0;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  margin-right: 60px;
+}
+
+.messageRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Bot Messages */
+.botAvatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #3a3a3a;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.botMessage {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: 1px solid #3a3a3a;
+}
+
+/* User Messages */
+.userMessageWrapper .messageRow {
+  justify-content: flex-end;
+}
+
+.userMessage {
+  background-color: #0084ff;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.userAvatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #3a3a3a;
+}
+
+/* Input Section */
+.inputSection {
+  background-color: #1a1a1a;
+  padding: 1.5rem;
+  border-top: 1px solid #2a2a2a;
+  position: sticky;
+  bottom: 0;
+}
+
+.inputContainer {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: #2a2a2a;
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  border: 1px solid #3a3a3a;
+}
+
+.messageInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.messageInput::placeholder {
+  color: #6b7280;
+}
+
+.inputActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iconButton {
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.iconButton:hover {
+  background-color: #3a3a3a;
+  color: #ffffff;
+}
+
+.sendButton {
+  background-color: #0084ff;
+  color: #ffffff;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sendButton:hover {
+  background-color: #0073e6;
+  transform: translateY(-1px);
+}
+
+.sendButton:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .botMessage,
+  .userMessage {
+    max-width: 85%;
+  }
+
+  .searchBar,
+  .inputContainer {
+    padding: 0.5rem 1rem;
+  }
+
+  .searchInput {
+    padding: 1rem 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .avatarLabel,
+  .userLabel {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .botAvatar,
+  .userAvatar {
+    width: 38px;
+    height: 38px;
+  }
+}

@@ -1,0 +1,292 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #1a1d24;
+}
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo {
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ===== SIDEBAR STYLES ===== */
+.sidebar {
+  width: 360px;
+  background-color: #0f1117;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  flex-shrink: 0;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #1e6b7a 0%, #2a8a9c 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.university {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.navItem:hover {
+  background-color: #1a1d24;
+  color: #ffffff;
+}
+
+.navItem.active {
+  background-color: #2a2f3a;
+  color: #ffffff;
+}
+
+.navItem svg {
+  flex-shrink: 0;
+}
+
+/* Footer Section */
+.footer {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.newButton {
+  width: 100%;
+  padding: 14px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.newButton:hover {
+  background-color: #1d4ed8;
+}
+
+.helpLink {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.938rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.helpLink:hover {
+  background-color: #1a1d24;
+  color: #ffffff;
+}
+
+.helpLink svg {
+  flex-shrink: 0;
+}
+
+/* ===== MAIN CONTENT STYLES ===== */
+.main {
+  flex: 1;
+  padding: 48px 64px;
+  background-color: #1a1d24;
+}
+
+.welcome {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 48px 0;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 24px 0;
+}
+
+/* Quick Actions Section */
+.quickActions {
+  margin-bottom: 48px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.primaryButton:hover {
+  background-color: #1d4ed8;
+}
+
+.secondaryButton {
+  background-color: #2a2f3a;
+  color: #ffffff;
+}
+
+.secondaryButton:hover {
+  background-color: #363c4a;
+}
+
+/* Recent Activity Section */
+.recentActivity {
+  margin-top: 48px;
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  background-color: #2a2f3a;
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.activityItem:hover {
+  background-color: #323846;
+}
+
+.activityIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #363c4a;
+  border-radius: 8px;
+  flex-shrink: 0;
+  color: #9ca3af;
+}
+
+.activityContent {
+  flex: 1;
+}
+
+.activityTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+}
+
+.activityDescription {
+  font-size: 0.938rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 280px;
+  }
+
+  .main {
+    padding: 32px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .main {
+    padding: 32px 24px;
+  }
+
+  .welcome {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+  }
+}
