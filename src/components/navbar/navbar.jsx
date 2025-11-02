@@ -11,7 +11,7 @@ const Navbar = () => {
           alt="KIIT Logo"
           className={styles.logo}
         />
-        <h1 className={styles.brand}>EduBuddy</h1>
+        <a href="/" className={styles.brand}>EduBuddy</a>
       </div>
 
       <ul className={styles.navLinks}>
