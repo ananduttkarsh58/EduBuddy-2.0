@@ -76,7 +76,7 @@ const Bot = () => {
       <main className={styles.mainContent}>
         {/* Header */}
         <div className={styles.header}>
-          <h1 className={styles.title}>Welcome to EduAssist</h1>
+          <h1 className={styles.title}>Welcome to EduBuddy</h1>
           <p className={styles.subtitle}>
             Ask me anything about your courses, assignments, or school resources. I'm here to help!
           </p>
@@ -95,7 +95,7 @@ const Bot = () => {
             >
               {message.sender === "bot" && (
                 <>
-                  <div className={styles.messageLabel}>EduAssist</div>
+                  <div className={styles.messageLabel}>EduBuddy</div>
                   <div className={styles.messageRow}>
                     <div className={styles.avatar}>
                       <img
