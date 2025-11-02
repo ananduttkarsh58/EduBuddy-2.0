@@ -9,7 +9,6 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
-
 .logoSection {
   display: flex;
   align-items: center;
@@ -24,6 +23,7 @@
 }
 
 .brand {
+  text-decoration: none;
   color: #d1d5db;
   font-weight: 600;
   font-size: 1.1rem;
