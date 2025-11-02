@@ -7,7 +7,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleTSClick = () => {
-    navigate("/ts");
+    navigate("/teachersdirectory");
   };
 
   const handleChtbotClick = () => {
