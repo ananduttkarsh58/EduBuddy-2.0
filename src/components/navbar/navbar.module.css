@@ -85,3 +85,23 @@
   color: #ffffff;
   transform: rotate(15deg);
 }
+
+/* Theme Toggle */
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.themeToggle:hover {
+  transform: scale(1.1);
+  color: var(--accent);
+}

@@ -1,8 +1,11 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./navbar.module.css";
-import { Sun } from "lucide-react";
 
 const Navbar = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.logoSection}>
@@ -11,20 +14,30 @@ const Navbar = () => {
           alt="KIIT Logo"
           className={styles.logo}
         />
-        <a href="/" className={styles.brand}>EduBuddy</a>
+        <Link to="/" className={styles.brand}>
+          EduBuddy
+        </Link>
       </div>
 
       <ul className={styles.navLinks}>
-        <li><a href="#" className={styles.active}>Home</a></li>
-        <li><a href="#">Materials</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Settings</a></li>
+        {/* Show Home only if not on dashboard */}
+        {!isHomePage && (
+          <li>
+            <Link to="/" className={styles.active}>
+              Home
+            </Link>
+          </li>
+        )}
+        <li>
+          <Link to="/notes">Materials</Link>
+        </li>
+        <li>
+          <Link to="/teachersdirectory">About us</Link>
+        </li>
+        <li>
+          <Link to="/settings">Settings</Link>
+        </li>
       </ul>
-
-      {/* <div className={styles.actions}>
-        <button className={styles.getStarted}>Get Started</button>
-        <Sun size={18} className={styles.icon} />
-      </div> */}
     </nav>
   );
 };

@@ -7,7 +7,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 3rem;
 }
 
@@ -27,9 +27,11 @@
   font-weight: 300;
 }
 
+/* ✅ Search Bar aligned slightly left */
 .searchContainer {
   position: relative;
-  width: 280px;
+  width: 320px;
+  margin-right: 4rem; /* shifted slightly left */
 }
 
 .searchIcon {
@@ -50,12 +52,19 @@
   font-size: 0.9rem;
   color: #333;
   outline: none;
+  box-shadow: 0 0 10px rgba(0, 255, 185, 0.2);
+  transition: all 0.3s ease;
 }
 
 .searchInput::placeholder {
   color: #999;
 }
 
+.searchInput:focus {
+  box-shadow: 0 0 15px rgba(0, 255, 185, 0.4);
+}
+
+/* Teachers Grid */
 .teachersGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -105,4 +114,34 @@
   color: rgba(255, 255, 255, 0.6);
   margin: 0;
   font-weight: 300;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .searchContainer {
+    margin-right: 1.5rem;
+    width: 260px;
+  }
+
+  .teachersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .searchContainer {
+    margin-right: 0;
+    width: 90%;
+  }
+
+  .teachersGrid {
+    grid-template-columns: 1fr;
+  }
 }
