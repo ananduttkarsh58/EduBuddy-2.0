@@ -1,0 +1,149 @@
+/* Layout */
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #1c1f23;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #141619;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.navItem {
+  color: #bcbcbc;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.navItem:hover {
+  background-color: #2b2f33;
+}
+
+.active {
+  background-color: #29423e;
+  color: #fff;
+}
+
+.footer {
+  color: #aaa;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Main content */
+.mainContent {
+  flex: 1;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.title {
+  color: #2af48d;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.addBtn {
+  background-color: #244d40;
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.addBtn:hover {
+  background-color: #2af48d;
+  color: #111;
+}
+
+/* Folder grid */
+.folderGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+}
+
+.folder {
+  border: 2px solid #5b5b5b;
+  border-radius: 10px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #1f2226;
+  transition: transform 0.3s ease, background 0.3s;
+}
+
+.folder:hover {
+  background-color: #2b2f33;
+  transform: translateY(-5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .mainContent {
+    padding: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+}

@@ -1,4 +1,4 @@
-import Navbar from "./navbar/navbar";
+import Navbar from "../../components/navbar/navbar";
 import Main from "./main/main";
 
 function TS() {
