@@ -13,6 +13,7 @@ import {
   Edit2,
   Check,
   X,
+  Edit, // <--- NEW icon for editing user prompts
 } from "lucide-react";
 
 const Bot = () => {
@@ -30,6 +31,10 @@ const Bot = () => {
   const [selectedFavorite, setSelectedFavorite] = useState(null);
   const [modalCopied, setModalCopied] = useState(false);
 
+  // ---- NEW: inline edit for user prompts ----
+  const [userEditingId, setUserEditingId] = useState(null);
+  const [userEditText, setUserEditText] = useState("");
+
   // Voice + file
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
@@ -38,6 +43,7 @@ const Bot = () => {
   const menuRef = useRef(null);
   const editInputRef = useRef(null);
   const chatContainerRef = useRef(null);
+  const textareaRef = useRef(null); // use ref instead of getElementById for input
 
   // Favorites stored in localStorage with migration
   const [favorites, setFavorites] = useState(() => {
@@ -66,7 +72,7 @@ const Bot = () => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
-  // Focus input when editing starts
+  // Focus input when editing starts (favorites rename)
   useEffect(() => {
     if (editingId && editInputRef.current) {
       editInputRef.current.focus();
@@ -174,6 +180,12 @@ const Bot = () => {
     const hasFiles = pendingAttachments.length > 0;
     if (!hasText && !hasFiles) return;
 
+    // stop voice if active
+    if (isListening && recognitionRef.current) {
+      try { recognitionRef.current.stop(); } catch {}
+    }
+    setIsListening(false);
+
     // bundle message
     const newMsg = {
       id: Date.now(),
@@ -181,7 +193,7 @@ const Bot = () => {
       username: "User",
       type: "bundle",
       text: inputMessage,
-      attachments: pendingAttachments, // [{ id, type:'image'|'file', ... }]
+      attachments: pendingAttachments,
     };
     setMessages((prev) => [...prev, newMsg]);
 
@@ -199,8 +211,7 @@ const Bot = () => {
     // reset input + tray
     setInputMessage("");
     setPendingAttachments([]);
-    const ta = document.getElementById("edubuddy-textarea");
-    if (ta) ta.style.height = "auto";
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
   };
 
   // Enter=send, Shift+Enter=newline
@@ -211,7 +222,7 @@ const Bot = () => {
     }
   };
 
-  // Copy / Download helpers (bot text only)
+  // Copy / Download helpers (bot text only + user text now)
   const handleCopy = (text, id) => {
     navigator.clipboard.writeText(text || "");
     setCopiedId(id);
@@ -274,8 +285,7 @@ const Bot = () => {
     ]);
     setInputMessage("");
     setPendingAttachments([]);
-    const ta = document.getElementById("edubuddy-textarea");
-    if (ta) ta.style.height = "auto";
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
   };
 
   const isFavorite = (messageId) => favorites.some((fav) => fav.messageId === messageId);
@@ -377,7 +387,7 @@ const Bot = () => {
     setPendingAttachments((prev) => prev.filter((a) => a.id !== id));
   };
 
-  // ---- Voice: Web Speech API ----
+  // ---- Voice: Web Speech API (unchanged from your version) ----
   const toggleListen = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -404,8 +414,8 @@ const Bot = () => {
         const next = (inputMessage + " " + interim + finalText).trim();
         setInputMessage(next);
 
-        const ta = document.getElementById("edubuddy-textarea");
-        if (ta) {
+        if (textareaRef.current) {
+          const ta = textareaRef.current;
           ta.style.height = "auto";
           ta.style.height = `${ta.scrollHeight}px`;
         }
@@ -423,6 +433,49 @@ const Bot = () => {
     } else {
       setIsListening(true);
       recognitionRef.current.start();
+    }
+  };
+
+  // ---- NEW: Edit & copy user message helpers ----
+  const startEditUserMessage = (message) => {
+    setUserEditingId(message.id);
+    setUserEditText(message.text || "");
+  };
+
+  const cancelEditUserMessage = () => {
+    setUserEditingId(null);
+    setUserEditText("");
+  };
+
+  const saveEditUserMessage = () => {
+    const trimmed = (userEditText || "").trim();
+    // update the message text
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.id === userEditingId ? { ...m, text: trimmed } : m
+      )
+    );
+    // append a fresh bot response to the updated prompt (like re-run)
+    if (trimmed.length > 0) {
+      const reply = {
+        id: Date.now() + Math.random(),
+        sender: "bot",
+        type: "text",
+        text: getSmartResponse(trimmed),
+      };
+      setMessages((prev) => [...prev, reply]);
+    }
+    setUserEditingId(null);
+    setUserEditText("");
+  };
+
+  const handleUserEditKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      saveEditUserMessage();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      cancelEditUserMessage();
     }
   };
 
@@ -662,49 +715,118 @@ const Bot = () => {
                   <div className={styles.userLabel}>{message.username || "User"}</div>
                   <div className={styles.messageRow}>
                     <div className={styles.userMessage}>
-                      {message.type === "bundle" ? (
-                        <>
-                          {message.text ? <div>{renderText(message.text)}</div> : null}
-                          {message.attachments?.length ? (
-                            <div className={styles.attachListInBubble}>
-                              {message.attachments.map((att) =>
-                                att.type === "image" ? (
-                                  <img
-                                    key={att.id}
-                                    src={att.src}
-                                    alt={att.name || "image"}
-                                    className={styles.uploadImage}
-                                  />
-                                ) : (
-                                  <a
-                                    key={att.id}
-                                    href={att.href}
-                                    download={att.name}
-                                    className={styles.fileLink}
-                                  >
-                                    {att.name} ({Math.round((att.size || 0) / 1024)} KB)
-                                  </a>
-                                )
+                      {/* ---- USER MESSAGE EDIT MODE ---- */}
+                      {userEditingId === message.id ? (
+                        <div>
+                          <textarea
+                            value={userEditText}
+                            onChange={(e) => {
+                              setUserEditText(e.target.value);
+                              e.target.style.height = "auto";
+                              e.target.style.height = `${e.target.scrollHeight}px`;
+                            }}
+                            onKeyDown={handleUserEditKeyDown}
+                            rows={1}
+                            className={styles.messageInput}
+                            placeholder="Edit your prompt…"
+                            style={{ width: "100%" }}
+                          />
+                          <div className={styles.actionButtons}>
+                            <button
+                              className={styles.copyBtn}
+                              onClick={() => handleCopy(userEditText, message.id)}
+                              title="Copy"
+                            >
+                              <Copy size={16} />
+                              {copiedId === message.id && (
+                                <span className={styles.copiedText}>Copied!</span>
                               )}
-                            </div>
-                          ) : null}
-                        </>
-                      ) : message.type === "image" ? (
-                        <img
-                          src={message.src}
-                          alt={message.name || "image"}
-                          className={styles.uploadImage}
-                        />
-                      ) : message.type === "file" ? (
-                        <a
-                          href={message.href}
-                          download={message.name}
-                          className={styles.fileLink}
-                        >
-                          {message.name} ({Math.round((message.size || 0) / 1024)} KB)
-                        </a>
+                            </button>
+                            <button
+                              className={styles.downloadBtn}
+                              onClick={saveEditUserMessage}
+                              title="Save (Enter)"
+                            >
+                              <Check size={16} />
+                            </button>
+                            <button
+                              className={styles.favoriteBtn}
+                              onClick={cancelEditUserMessage}
+                              title="Cancel (Esc)"
+                            >
+                              <X size={16} />
+                            </button>
+                          </div>
+                        </div>
                       ) : (
-                        renderText(message.text || "")
+                        <>
+                          {/* Normal view */}
+                          {message.type === "bundle" ? (
+                            <>
+                              {message.text ? <div>{renderText(message.text)}</div> : null}
+                              {message.attachments?.length ? (
+                                <div className={styles.attachListInBubble}>
+                                  {message.attachments.map((att) =>
+                                    att.type === "image" ? (
+                                      <img
+                                        key={att.id}
+                                        src={att.src}
+                                        alt={att.name || "image"}
+                                        className={styles.uploadImage}
+                                      />
+                                    ) : (
+                                      <a
+                                        key={att.id}
+                                        href={att.href}
+                                        download={att.name}
+                                        className={styles.fileLink}
+                                      >
+                                        {att.name} ({Math.round((att.size || 0) / 1024)} KB)
+                                      </a>
+                                    )
+                                  )}
+                                </div>
+                              ) : null}
+                            </>
+                          ) : message.type === "image" ? (
+                            <img
+                              src={message.src}
+                              alt={message.name || "image"}
+                              className={styles.uploadImage}
+                            />
+                          ) : message.type === "file" ? (
+                            <a
+                              href={message.href}
+                              download={message.name}
+                              className={styles.fileLink}
+                            >
+                              {message.name} ({Math.round((message.size || 0) / 1024)} KB)
+                            </a>
+                          ) : (
+                            renderText(message.text || "")
+                          )}
+
+                          {/* ---- USER ACTIONS: COPY + EDIT ---- */}
+                          <div className={styles.actionButtons}>
+                            <button
+                              className={styles.copyBtn}
+                              onClick={() => handleCopy(message.text || "", message.id)}
+                              title="Copy Prompt"
+                            >
+                              <Copy size={16} />
+                              {copiedId === message.id && (
+                                <span className={styles.copiedText}>Copied!</span>
+                              )}
+                            </button>
+                            <button
+                              className={styles.downloadBtn}
+                              onClick={() => startEditUserMessage(message)}
+                              title="Edit Prompt"
+                            >
+                              <Edit size={16} />
+                            </button>
+                          </div>
+                        </>
                       )}
                     </div>
                     <div className={styles.avatar}>
@@ -751,6 +873,7 @@ const Bot = () => {
 
             <div className={styles.inputRow}>
               <textarea
+                ref={textareaRef}
                 id="edubuddy-textarea"
                 placeholder="Type your question here..."
                 className={styles.messageInput}

@@ -875,3 +875,17 @@
   border-radius: 8px;
   display: block;
 }
+
+/* Make user-bubble actions sit nicely under the edited textarea */
+.userMessage .actionButtons { margin-top: 8px; gap: 8px; }
+
+/* Slight contrast when editing inside the blue bubble */
+.userMessage textarea.messageInput {
+  background: rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* (Optional) mic recording feedback if you wire it up later */
+.pulsing { animation: pulse 1s infinite; }
+@keyframes pulse { 0%{transform:scale(1)} 50%{transform:scale(1.08)} 100%{transform:scale(1)} }
