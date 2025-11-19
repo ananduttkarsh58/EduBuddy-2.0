@@ -20,7 +20,7 @@ const Main = () => {
   ];
 
   const handleStudentClick = () => {
-    navigate(`/ts`);
+    navigate(`/teachermessagepage`);
   };
 
   return (

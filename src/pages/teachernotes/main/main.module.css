@@ -109,6 +109,9 @@
   font-weight: 600;
   background-color: #1f2226;
   transition: transform 0.3s ease, background 0.3s;
+  text-transform: uppercase; /* Add this */
+  text-align: center; /* Add this for multi-line text */
+  padding: 10px; /* Add some padding to prevent text touching edges */
 }
 
 .folder:hover {
@@ -147,3 +150,92 @@
     font-size: 1.6rem;
   }
 }
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modalTitle {
+  color: #00ff88;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.modalInput {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 24px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.modalInput:focus {
+  border-color: #00ff88;
+}
+
+.modalInput::placeholder {
+  color: #888;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modalBtnCancel,
+.modalBtnOk {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+
+.modalBtnCancel {
+  background-color: #333;
+  color: white;
+}
+
+.modalBtnCancel:hover {
+  background-color: #444;
+}
+
+.modalBtnOk {
+  background-color: #00ff88;
+  color: #1a1a1a;
+}
+
+.modalBtnOk:hover {
+  background-color: #00cc6f;
+  transform: translateY(-1px);
+}
+

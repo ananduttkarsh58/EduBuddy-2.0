@@ -143,7 +143,7 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
-      {/* Chatbot Button */}
+      {/* Chatbot Button
       <button
         className={`${styles.submitButton} ${styles.chatbotButton}`}
         onClick={() => navigate('/chatbot')}
@@ -160,7 +160,7 @@ const Main = () => {
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         </svg>
         Chatbot
-      </button>
+      </button> */}
 
       <div className={styles.header}>
         <h1 className={styles.title}>Generate a new Presentation</h1>

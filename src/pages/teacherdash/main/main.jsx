@@ -5,9 +5,13 @@ import styles from './main.module.css';
 const Main = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate('/notes');
-  }
+  const handleNotesClick = () => {
+    navigate('/teachernotes');
+  };
+
+  const handleUploadNotesClick = () => {
+    navigate('/teachernotes');
+  };
 
   return (
     <div className={styles.container}>
@@ -33,21 +37,7 @@ const Main = () => {
             <span>Home</span>
           </a>
 
-          {/* <a href="#" className={styles.navItem}>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            <span>Courses</span>
-          </a> */}
-
-          <a href="/messages" className={styles.navItem}>
+          <a href="/teachermessages" className={styles.navItem}>
             <svg
               width="20"
               height="20"
@@ -62,7 +52,12 @@ const Main = () => {
             <span>Messages</span>
           </a>
 
-          <a href="/notes" className={styles.navItem}>
+          {/* Updated Notes link to use navigate */}
+          <div 
+            className={styles.navItem} 
+            onClick={handleNotesClick}
+            style={{ cursor: 'pointer' }}
+          >
             <svg
               width="20"
               height="20"
@@ -77,7 +72,7 @@ const Main = () => {
               <line x1="16" y1="17" x2="8" y2="17" />
             </svg>
             <span>Notes</span>
-          </a>
+          </div>
 
           <a href="#" className={styles.navItem}>
             <svg
@@ -96,7 +91,7 @@ const Main = () => {
         </nav>
 
         <div className={styles.footer}>
-          <button className={styles.newButton}>New</button>
+          {/* <button className={styles.newButton}>New</button> */}
 
           <a href="#" className={styles.helpLink}>
             <svg
@@ -124,8 +119,9 @@ const Main = () => {
         <section className={styles.quickActions}>
           <h2 className={styles.sectionTitle}>Quick Actions</h2>
           <div className={styles.actionButtons}>
-            <button className={styles.primaryButton} onClick={handleClick}>Upload Notes</button>
-            {/* <button className={styles.secondaryButton}>Manage Courses</button> */}
+            <button className={styles.primaryButton} onClick={handleUploadNotesClick}>
+              Upload Notes
+            </button>
 
             <button
               className={styles.secondaryButton}
@@ -135,7 +131,7 @@ const Main = () => {
             </button>
             <button
               className={styles.secondaryButton}
-              onClick={() => navigate('/chatbot')}
+              onClick={() => navigate('/teacherchatbot')}
             >
               Chatbot
             </button>
@@ -143,7 +139,7 @@ const Main = () => {
         </section>
 
         {/* Recent Activity */}
-        <section className={styles.recentActivity}>
+        {/* <section className={styles.recentActivity}>
           <h2 className={styles.sectionTitle}>Recent Activity</h2>
 
           <div className={styles.activityList}>
@@ -214,7 +210,7 @@ const Main = () => {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
     </div>
   );

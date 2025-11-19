@@ -45,7 +45,7 @@ const Navbar = () => {
           alt="KIIT Logo"
           className={styles.logo}
         />
-        <Link to="/" className={styles.brand}>
+        <Link to="/home" className={styles.brand}>
           EduBuddy
         </Link>
       </div>
@@ -54,13 +54,13 @@ const Navbar = () => {
       <ul className={styles.navLinks}>
         {!isHomePage && (
           <li>
-            <Link to="/" className={styles.active}>
+            <Link to="/home" className={styles.active}>
               Home
             </Link>
           </li>
         )}
         <li>
-          <Link to="/notes">Materials</Link>
+          <Link to="/teacherdirectorymaterial">Materials</Link>
         </li>
 
         {/* ✅ Static HTML page in /public/about.html */}
