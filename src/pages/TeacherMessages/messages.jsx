@@ -1,4 +1,4 @@
-import Navbar from "../../components/navbar/navbar";
+import Navbar from "../../components/TeacherNavbar/Tnavbar";
 import Main from "./main/main";
 
 function Messages() {

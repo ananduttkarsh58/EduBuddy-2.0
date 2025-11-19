@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../../components/navbar/navbar.jsx';
+import Navbar from '../../components/studentnavbar/navbar.jsx';
 import Main from './main/main.jsx';
 
 const Subjectnotes = () => {

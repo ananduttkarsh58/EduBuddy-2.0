@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from '../../components/navbar/navbar'
+import Navbar from '../../components/studentnavbar/navbar'
 import Main from './main/main.jsx'
 
 const NOTES = () => {

@@ -8,7 +8,7 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import Home from "./pages/home/home";
 import TS from "./pages/ts/ts";
 import Chatbot from "./pages/chatbot/chatbot";
-import Messages from "./pages/messages/messages";
+import Messages from "./pages/TeacherMessages/messages";
 import Teacherdash from "./pages/teacherdash/teacherdash";
 import TD from "./pages/teachersdirectory/td";
 import PPT from "./pages/ppt/ppt";
@@ -17,7 +17,7 @@ import SubjectNotes from "./pages/subjectnotes/subjectnotes"; //
 import TeacherNotes from "./pages/teachernotes/notes";
 import TeacherChatbot from "./pages/TeacherChatbot/chatbot";
 import ResetPasswordPage from "./pages/auth/ResetPasswordPage";
-import TeacherMessages from "./pages/messages/messages";
+import TeacherMessages from "./pages/TeacherMessages/messages";
 import TeacherMessagesPage from "./pages/TS_teacher/TS_teacher";
 import StudentsSubjectNotes from "./pages/studentsubjectnotes/studentsubjectnotes";
 import TeacherDirectoryMaterial from "./pages/TeacherDirectoryMaterial/teacherdirectorymaterial";
